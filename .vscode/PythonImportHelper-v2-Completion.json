@@ -1,0 +1,179 @@
+[
+    {
+        "label": "sqlite3",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sqlite3",
+        "description": "sqlite3",
+        "detail": "sqlite3",
+        "documentation": {}
+    },
+    {
+        "label": "Banco_DB",
+        "importPath": "banco_db.db",
+        "description": "banco_db.db",
+        "isExtraImport": true,
+        "detail": "banco_db.db",
+        "documentation": {}
+    },
+    {
+        "label": "BancoDB",
+        "importPath": "banco_db.db",
+        "description": "banco_db.db",
+        "isExtraImport": true,
+        "detail": "banco_db.db",
+        "documentation": {}
+    },
+    {
+        "label": "BancoDB",
+        "importPath": "banco_db.db",
+        "description": "banco_db.db",
+        "isExtraImport": true,
+        "detail": "banco_db.db",
+        "documentation": {}
+    },
+    {
+        "label": "BancoDB",
+        "importPath": "banco_db.db",
+        "description": "banco_db.db",
+        "isExtraImport": true,
+        "detail": "banco_db.db",
+        "documentation": {}
+    },
+    {
+        "label": "BancoDB",
+        "importPath": "banco_db.db",
+        "description": "banco_db.db",
+        "isExtraImport": true,
+        "detail": "banco_db.db",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "Movimentacao",
+        "importPath": "models.movimentacao",
+        "description": "models.movimentacao",
+        "isExtraImport": true,
+        "detail": "models.movimentacao",
+        "documentation": {}
+    },
+    {
+        "label": "Movimentacao",
+        "importPath": "models.movimentacao",
+        "description": "models.movimentacao",
+        "isExtraImport": true,
+        "detail": "models.movimentacao",
+        "documentation": {}
+    },
+    {
+        "label": "entrada_produto",
+        "importPath": "services.estoque_service",
+        "description": "services.estoque_service",
+        "isExtraImport": true,
+        "detail": "services.estoque_service",
+        "documentation": {}
+    },
+    {
+        "label": "saida_produto",
+        "importPath": "services.estoque_service",
+        "description": "services.estoque_service",
+        "isExtraImport": true,
+        "detail": "services.estoque_service",
+        "documentation": {}
+    },
+    {
+        "label": "Produto",
+        "importPath": "models.produto",
+        "description": "models.produto",
+        "isExtraImport": true,
+        "detail": "models.produto",
+        "documentation": {}
+    },
+    {
+        "label": "menu",
+        "importPath": "utils.menu",
+        "description": "utils.menu",
+        "isExtraImport": true,
+        "detail": "utils.menu",
+        "documentation": {}
+    },
+    {
+        "label": "BancoDB",
+        "kind": 6,
+        "importPath": "banco_db.db",
+        "description": "banco_db.db",
+        "peekOfCode": "class BancoDB:\n    def __init__(self):\n        self.conexao = sqlite3.connect(\"estoque.db\")\n        self.cursor = self.conexao.cursor()\n    def criar_tabelas(self):\n        self.cursor.execute(\n            \"\"\"\n        CREATE TABLE IF NOT EXISTS produtos(\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            nome TEXT,",
+        "detail": "banco_db.db",
+        "documentation": {}
+    },
+    {
+        "label": "Funcionario",
+        "kind": 6,
+        "importPath": "models.funcionario",
+        "description": "models.funcionario",
+        "peekOfCode": "class Funcionario:\n    def __init__(self, nome, cpf, senha):\n        self.nome = nome\n        self.cpf = cpf\n        self.senha = senha\n        self.db = Banco_DB()\n    def salvar(self):\n        sql = \"INSERT INTO funcionarios (nome, cpf, senha) VALUES (?, ?, ?)\"\n        self.db.conexao.commit()\n        print(\"Funcionário cadastrado com sucesso!\")",
+        "detail": "models.funcionario",
+        "documentation": {}
+    },
+    {
+        "label": "Movimentacao",
+        "kind": 6,
+        "importPath": "models.movimentacao",
+        "description": "models.movimentacao",
+        "peekOfCode": "class Movimentacao:\n    def __init__(self, produto_id, tipo, quantidade, responsavel):\n        self.produto_id = produto_id\n        self.tipo = tipo\n        self.quantidade = quantidade\n        self.responsavel = responsavel\n        self.data = datetime.now().strftime(\"%d/%m/%Y %H:%M\")\n        self.db = BancoDB()\n    def registrar(self):\n        sql = \"\"\"",
+        "detail": "models.movimentacao",
+        "documentation": {}
+    },
+    {
+        "label": "Produto",
+        "kind": 6,
+        "importPath": "models.produto",
+        "description": "models.produto",
+        "peekOfCode": "class Produto:\n    def __init__(self, nome, quantidade=0):\n        self.nome = nome\n        self.quantidade = quantidade\n        self.db = BancoDB()\n    def cadastrar(self):\n        sql = \"INSERT INTO produtos (nome, quantidade) VALUES (?, ?)\"\n        self.db.cursor.execute(sql, (self.nome, self.quantidade))\n        self.db.conexao.commit()\n        print(\"Produto cadastrado com sucesso!\")",
+        "detail": "models.produto",
+        "documentation": {}
+    },
+    {
+        "label": "entrada_produto",
+        "kind": 2,
+        "importPath": "services.estoque_service",
+        "description": "services.estoque_service",
+        "peekOfCode": "def entrada_produto():\n    produto_id = int(input(\"ID do produto: \"))\n    quantidade = int(input(\"Quantidade recebida: \"))\n    responsavel = input(\"Responsável: \")\n    db.cursor.execute(\n        \"UPDATE produtos SET quantidade = quantidade + ? WHERE id=?\",\n        (quantidade, produto_id),\n    )\n    db.conexao.commit()\n    movimentacao = Movimentacao(produto_id, \"entrada\", quantidade, responsavel)",
+        "detail": "services.estoque_service",
+        "documentation": {}
+    },
+    {
+        "label": "saida_produto",
+        "kind": 2,
+        "importPath": "services.estoque_service",
+        "description": "services.estoque_service",
+        "peekOfCode": "def saida_produto():\n    produto_id = int(input(\"ID do produto: \"))\n    quantidade = int(input(\"Quantidade retirada: \"))\n    responsavel = input(\"Responsável: \")\n    db.cursor.execute(\"SELECT quantidade FROM produtos WHERE id=?\", (produto_id,))\n    estoque = db.cursor.fetchone()\n    if estoque[0] < quantidade:\n        print(\"Estoque insuficiente!\")\n        return\n    db.cursor.execute(",
+        "detail": "services.estoque_service",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "services.estoque_service",
+        "description": "services.estoque_service",
+        "peekOfCode": "db = BancoDB()\ndef entrada_produto():\n    produto_id = int(input(\"ID do produto: \"))\n    quantidade = int(input(\"Quantidade recebida: \"))\n    responsavel = input(\"Responsável: \")\n    db.cursor.execute(\n        \"UPDATE produtos SET quantidade = quantidade + ? WHERE id=?\",\n        (quantidade, produto_id),\n    )\n    db.conexao.commit()",
+        "detail": "services.estoque_service",
+        "documentation": {}
+    },
+    {
+        "label": "menu",
+        "kind": 2,
+        "importPath": "utils.menu",
+        "description": "utils.menu",
+        "peekOfCode": "def menu():\n    while True:\n        print(\"\\n===== SISTEMA DE ESTOQUE =====\")\n        print(\"1 - Cadastrar Produto\")\n        print(\"2 - Listar Produtos\")\n        print(\"3 - Entrada de Produto\")\n        print(\"4 - Saída de Produto\")\n        print(\"5 - Ver Movimentações\")\n        print(\"6 - Sair\")\n        opcao = input(\"Escolha: \")",
+        "detail": "utils.menu",
+        "documentation": {}
+    }
+]
